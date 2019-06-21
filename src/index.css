@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.sign-in-form{
+  padding: 7.5%;
+  width : 50%;
+  
+}

@@ -1,7 +1,10 @@
 import React from 'react';
-import Maps from './components/map/map.js';
-import { BrowserRouter }  from 'react-router-dom';
-import ButtonAppBar from './components/auth/navbar.js';
+import Add from './components/add-homeless/add.js';
+import { BrowserRouter ,Switch , Route }  from 'react-router-dom';
+import ButtonAppBar from './components/layout/navbar';
+import SignIn from './components/auth/SignIn.js';
+import SignUp from './components/auth/SignUp.js';
+
 // marker icon code
 
 //class components
@@ -11,7 +14,11 @@ class App extends React.Component{
       <BrowserRouter>
            <div id="coantiner">
               <ButtonAppBar/>
-              <Maps />
+              <Switch>
+                <Route path="/signin" component={SignIn}/>
+                <Route path="/signup" component={SignUp}/>
+                <Route path="/add" component={Add}/>
+              </Switch>
            </div>
       </BrowserRouter>
     );
