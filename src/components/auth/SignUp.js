@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Button } from 'reactstrap';
 export class SignUp extends Component {
 
 
     state={
         email : '',
         name  : '',
-        gender : 'male',
-        password : '',
+        passowrd : '',
     }
+    handleChange=(event)=>{
+        console.log(event.target.id);
+        this.setState({
+            [event.target.id] : event.target.value,
+        });
+        console.log(this.state);
+    }
+
     render() {
         const classes = makeStyles(theme => ({
                             container: {
@@ -30,21 +36,7 @@ export class SignUp extends Component {
                                 width: 200,
                             },
                         }));
-        const genders = [
-                            {
-                                value: 'female',
-                                label: 'Female',
-                            },
-                            {
-                                value: 'male',
-                                label: 'Male',
-                            },
-                            {
-                                value: 'others',
-                                label: 'Others',
-                            },
-
-                        ];
+      
           
         return (
             <div className="sign-in-form">
@@ -52,53 +44,34 @@ export class SignUp extends Component {
     
                     
                     <TextField
-                        id="standard-with-placeholder"
-                        label="Email"
+                        id="email"
+                        label="email"
                         placeholder="Email"
                         fullWidth
                         margin="normal"
+                        onChange={this.handleChange}
                     />
                 
                     <TextField
-                    id="standard-with-placeholder"
-                    label="Name"
+                    id="name"
+                    label="name"
                     placeholder="Enter your name"
                     fullWidth
                     margin="normal"
-                    />
-                
-                
-                    <TextField
-                    id="standard-select-gender"
-                    select
-                    label="Gender"
-                    fullWidth
-                    value={genders.gender}
-                   
-                    SelectProps={{
-                        MenuProps: {
-                        className: classes.menu,
-                        },
-                    }}
-                    helperText="Please select your gender"
-                    margin="normal"
-                    >
-                    {genders.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                        </MenuItem>
-                    ))}
-                    </TextField>
+                    onChange={this.handleChange}
+                    />                
                     
+
                     <TextField
-                    id="standard-password-input"
-                    label="Password"
+                    id="passowrd"
+                    label="password"
                     fullWidth
                     type="password"
                     autoComplete="current-password"
                     margin="normal"
+                    onChange={this.handleChange}
                     />
-                    <Button color="inherit">SignUp</Button>
+                    <Button color="primary">SignUp</Button>
                 </form>
             </div>
         )

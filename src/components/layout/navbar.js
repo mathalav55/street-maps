@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import SignedOut from './signedOut.js';
 import SignedIn from './signedIn.js';
-
+import { NavLink } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -24,13 +24,13 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="default">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu">
          
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Street
+            <NavLink to="/home">Street</NavLink>
           </Typography>
           <SignedOut/>
           <SignedIn/>

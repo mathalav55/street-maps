@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -27,8 +28,8 @@ export default function SignedIn() {
   return (
     <div >
         <Toolbar>
-          <Button color="inherit">add+</Button>
-          <Button color="inherit">Logout</Button>
+          <Button color="inherit"><NavLink to="/add">Add+</NavLink></Button>
+          <Button color="inherit"><NavLink to="/">Logout</NavLink></Button>
           <Avatar className={classes.purpleAvatar}>OP</Avatar>
         </Toolbar>
     </div>

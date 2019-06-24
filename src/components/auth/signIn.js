@@ -2,12 +2,23 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import RaisedButton from '@material-ui/core/Button';
 class SignIn extends React.Component{
    state={
      email : '',
-     passowrd : ''
+     password : ''
    }
+   handleSubmit=(event)=>{
+      event.preventDefault();
+      console.log(this.state);
+   }
+   handleChange=(event)=>{
+    
+    this.setState({
+      [event.target.id] : event.target.value,
+    });
+      
+  }
   render(){
       const classes = makeStyles(theme => ({
         container: {
@@ -30,27 +41,33 @@ class SignIn extends React.Component{
       return (
 
               <div className="sign-in-form">
-                  <form className={classes.container} noValidate autoComplete="off">
+                  <form className={classes.container} onSubmit={this.handleSubmit} >
                   <Typography variant="h6" className={classes.title}>
                     Sign In
                   </Typography>
                       <TextField
-                          id="standard-full-width"
+                          id="email"
                           label="E-mail"
                           type="text"
                           fullWidth
                           margin="normal"
+                          onChange={this.handleChange}
                       />
                           
                       <TextField
-                          id="standard-full-width"
+                          id="password"
                           label="Password"
                           fullWidth
                           type="password"
                           autoComplete="current-password"
                           margin="normal"
+                          onChange={this.handleChange}
                       />
-                       <Button color="inherit">Login</Button>
+                      <RaisedButton type="submit" label="login" className="button-submit" >
+                        <Typography variant="h6" className={classes.title}>
+                            Login
+                        </Typography>
+                      </RaisedButton>
                   </form>
               </div>
         );

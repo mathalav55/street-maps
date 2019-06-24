@@ -1,0 +1,9 @@
+#add-icon{
+    z-index: 999;
+    position: absolute;
+    margin-left: 80%;
+    margin-top: 30%;
+}
+#form-container{
+    width : 50%;
+}

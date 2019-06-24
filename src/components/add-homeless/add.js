@@ -1,22 +1,42 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import Maps from './map.js';
+import Modal from '@material-ui/core/Modal';
+import Input from '@material-ui/core/Input';
+import './add.css';
+
 class Add extends Component {
 
 
     state={
-        email : '',
-        name  : '',
-        gender : 'male',
-        password : '',
         location : {
             lat : 12.000 ,
             lng : 11.00
-        }
+        },
+        pop : false
     }
+    handleClick=()=>{
+          this.setState({
+              pop : true
+          });
+    }
+    handleClose=()=>{
+        this.setState({
+            pop : false
+        });
+    }
+    ModalStyle() {
+        const top = 200;
+        const left = 200;
+      
+        return {
+          top: `${top}%`,
+          left: `${left}%`,
+          transform: `translate(-${top}%, -${left}%)`,
+        };
+      }
     render() {
         const classes = makeStyles(theme => ({
                             container: {
@@ -34,77 +54,42 @@ class Add extends Component {
                             menu: {
                                 width: 200,
                             },
+                            paper: {
+                                position: 'absolute',
+                                width: 400,
+                                backgroundColor: theme.palette.background.paper,
+                                boxShadow: theme.shadows[5],
+                                padding: theme.spacing(4),
+                                outline: 'none',
+                            },
                         }));
-        const genders = [
-                            {
-                                value: 'female',
-                                label: 'Female',
-                            },
-                            {
-                                value: 'male',
-                                label: 'Male',
-                            },
-                            {
-                                value: 'others',
-                                label: 'Others',
-                            },
-
-                        ];
-          
+        
         return (
-            <div className="sign-in-form">
-                    <Maps/>
-                    <form className={classes.container} noValidate autoComplete="off">
-
-                    <TextField
-                        id="standard-with-placeholder"
-                        label="Email"
-                        placeholder="Email"
-                        fullWidth
-                        margin="normal"
-                    />
-                
-                    <TextField
-                        id="standard-with-placeholder"
-                        label="Name"
-                        placeholder="Enter your name"
-                        fullWidth
-                        margin="normal"
-                    />
-                
-                
-                    <TextField
-                        id="standard-select-gender"
-                        select
-                        label="Gender"
-                        fullWidth
-                        value={genders.gender}
-                    
-                        SelectProps={{
-                            MenuProps: {
-                            className: classes.menu,
-                            },
-                        }}
-                        helperText="Please select your gender"
-                        margin="normal"
+            <div className="">
+                    <Fab  id="add-icon" color="primary" ria-label="Add" onClick={this.handleClick}  className={classes.fabButton}>
+                        <AddIcon />
+                    </Fab>
+                    <Modal
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                        open={this.state.pop}
+                        onClose={this.handleClose}
                     >
-                            {genders.map(option => (
-                                <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                                </MenuItem>
-                            ))}
-                    </TextField>
+                        <div style={this.modalStyle} className={classes.paper}>
+                            
+                                <form className={classes.container} id="form-container" noValidate autoComplete="off">
+                                    <Input
+                                        placeholder="Placeholder"
+                                        className={classes.input}
+                                        inputProps={{
+                                        'aria-label': 'Description',
+                                        }}
+                                    />
+                                </form>
+                        </div>
+                    </Modal>
+                    <Maps/>
                     
-                    <TextField
-                        id="standard-password-input"
-                        label="Password"
-                        fullWidth
-                        type="password"
-                        autoComplete="current-password"
-                        margin="normal"
-                    />
-                    <Button color="inherit">SignUp</Button>
-                </form>
                 
             </div>
         )
