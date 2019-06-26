@@ -3,10 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Maps from './map.js';
-import Modal from '@material-ui/core/Modal';
-import Input from '@material-ui/core/Input';
 import './add.css';
-
+import Form from './form.js';
 class Add extends Component {
 
 
@@ -27,69 +25,34 @@ class Add extends Component {
             pop : false
         });
     }
-    ModalStyle() {
-        const top = 200;
-        const left = 200;
+    getModalStyle() {
+        const top = 50 ;
+        const left = 50;
       
         return {
           top: `${top}%`,
           left: `${left}%`,
           transform: `translate(-${top}%, -${left}%)`,
         };
-      }
+    }
     render() {
         const classes = makeStyles(theme => ({
                             container: {
                                 display: 'flex',
                                 flexWrap: 'wrap',
                             },
-                            textField: {
-                                marginLeft: theme.spacing(1),
-                                marginRight: theme.spacing(1),
-                                width: 200,
-                            },
-                            dense: {
-                                marginTop: 19,
-                            },
-                            menu: {
-                                width: 200,
-                            },
-                            paper: {
-                                position: 'absolute',
-                                width: 400,
-                                backgroundColor: theme.palette.background.paper,
-                                boxShadow: theme.shadows[5],
-                                padding: theme.spacing(4),
-                                outline: 'none',
-                            },
+                            fab: {
+                                margin: theme.spacing(1),
+                              },
+                         
                         }));
-        
+        const modalStyle=this.getModalStyle();
         return (
-            <div className="">
-                    <Fab  id="add-icon" color="primary" ria-label="Add" onClick={this.handleClick}  className={classes.fabButton}>
-                        <AddIcon />
-                    </Fab>
-                    <Modal
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                        open={this.state.pop}
-                        onClose={this.handleClose}
-                    >
-                        <div style={this.modalStyle} className={classes.paper}>
-                            
-                                <form className={classes.container} id="form-container" noValidate autoComplete="off">
-                                    <Input
-                                        placeholder="Placeholder"
-                                        className={classes.input}
-                                        inputProps={{
-                                        'aria-label': 'Description',
-                                        }}
-                                    />
-                                </form>
-                        </div>
-                    </Modal>
+            <div className={classes.container}>
+                    <div id="modal">
+                        <Form/>
+                    </div>
                     <Maps/>
-                    
                 
             </div>
         )

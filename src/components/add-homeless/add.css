@@ -1,9 +1,20 @@
-#add-icon{
+#modal{
     z-index: 999;
     position: absolute;
     margin-left: 80%;
     margin-top: 30%;
+    outline: none;
 }
 #form-container{
     width : 50%;
+}
+#add-icon{
+    outline: none;
+}
+#form{
+    width : 70%;
+    border-radius: 20px;
+}
+.form-contents{
+    padding : 2.5%;
 }

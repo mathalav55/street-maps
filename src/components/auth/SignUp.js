@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Button } from 'reactstrap';
+import Button from '@material-ui/core/Button';
 export class SignUp extends Component {
 
 
@@ -34,6 +34,9 @@ export class SignUp extends Component {
                             },
                             menu: {
                                 width: 200,
+                            },
+                            button: {
+                                margin: theme.spacing(1),
                             },
                         }));
       
@@ -71,7 +74,9 @@ export class SignUp extends Component {
                     margin="normal"
                     onChange={this.handleChange}
                     />
-                    <Button color="primary">SignUp</Button>
+                    <Button variant="contained" color="primary" className={classes.button}>
+                        Create Account
+                    </Button>
                 </form>
             </div>
         )

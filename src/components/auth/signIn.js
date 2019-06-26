@@ -2,14 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import RaisedButton from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 class SignIn extends React.Component{
    state={
      email : '',
      password : ''
    }
    handleSubmit=(event)=>{
-      event.preventDefault();
       console.log(this.state);
    }
    handleChange=(event)=>{
@@ -41,7 +40,7 @@ class SignIn extends React.Component{
       return (
 
               <div className="sign-in-form">
-                  <form className={classes.container} onSubmit={this.handleSubmit} >
+                  <form className={classes.container} onSubmit={this.handleSubmit} autoComplete="off" >
                   <Typography variant="h6" className={classes.title}>
                     Sign In
                   </Typography>
@@ -63,11 +62,9 @@ class SignIn extends React.Component{
                           margin="normal"
                           onChange={this.handleChange}
                       />
-                      <RaisedButton type="submit" label="login" className="button-submit" >
-                        <Typography variant="h6" className={classes.title}>
-                            Login
-                        </Typography>
-                      </RaisedButton>
+                      <Button variant="contained" color="primary" className={classes.button}>
+                          Create Account
+                      </Button>
                   </form>
               </div>
         );
