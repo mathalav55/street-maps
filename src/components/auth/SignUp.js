@@ -11,10 +11,12 @@ export class SignUp extends Component {
         passowrd : '',
     }
     handleChange=(event)=>{
-        console.log(event.target.id);
         this.setState({
             [event.target.id] : event.target.value,
         });
+    }
+    handleSubmit=(event)=>{
+        event.preventDefault();
         console.log(this.state);
     }
 
@@ -43,7 +45,7 @@ export class SignUp extends Component {
           
         return (
             <div className="sign-in-form">
-                    <form className={classes.container} noValidate autoComplete="off">
+                    <form className={classes.container} onSubmit={this.handleSubmit} autoComplete="off">
     
                     
                     <TextField
@@ -74,7 +76,7 @@ export class SignUp extends Component {
                     margin="normal"
                     onChange={this.handleChange}
                     />
-                    <Button variant="contained" color="primary" className={classes.button}>
+                    <Button type="submit" variant="contained" color="primary" className={classes.button}>
                         Create Account
                     </Button>
                 </form>

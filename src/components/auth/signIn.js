@@ -9,10 +9,10 @@ class SignIn extends React.Component{
      password : ''
    }
    handleSubmit=(event)=>{
+     event.preventDefault();
       console.log(this.state);
    }
    handleChange=(event)=>{
-    
     this.setState({
       [event.target.id] : event.target.value,
     });
@@ -62,8 +62,8 @@ class SignIn extends React.Component{
                           margin="normal"
                           onChange={this.handleChange}
                       />
-                      <Button variant="contained" color="primary" className={classes.button}>
-                          Create Account
+                      <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                          Login
                       </Button>
                   </form>
               </div>

@@ -1,39 +1,24 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Maps from './map.js';
+import Maps from './map/map';
 import './add.css';
-import Form from './form.js';
+import Modal from './form/modal';
+import { addHomeless } from '../../store/actions/addActions';
+import {connect} from 'react-redux';
 class Add extends Component {
-
-
     state={
+        name: '',
+        support : '',
+        landmark :'',
+        image : '',
         location : {
-            lat : 12.000 ,
-            lng : 11.00
-        },
-        pop : false
+            lat : '',
+            lng : ''
+        }
     }
-    handleClick=()=>{
-          this.setState({
-              pop : true
-          });
-    }
-    handleClose=()=>{
-        this.setState({
-            pop : false
-        });
-    }
-    getModalStyle() {
-        const top = 50 ;
-        const left = 50;
-      
-        return {
-          top: `${top}%`,
-          left: `${left}%`,
-          transform: `translate(-${top}%, -${left}%)`,
-        };
+    formData=(data)=>{
+        this.state=data;
+        this.props.addHomeless(this.state);
     }
     render() {
         const classes = makeStyles(theme => ({
@@ -46,11 +31,10 @@ class Add extends Component {
                               },
                          
                         }));
-        const modalStyle=this.getModalStyle();
         return (
             <div className={classes.container}>
                     <div id="modal">
-                        <Form/>
+                        <Modal data={this.formData}/>
                     </div>
                     <Maps/>
                 
@@ -58,5 +42,9 @@ class Add extends Component {
         )
     }
 }
-
-export default Add;
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        addHomeless : (homeless)=>dispatch(addHomeless(homeless)),
+    }
+}
+export default connect(null,mapDispatchToProps)(Add);
