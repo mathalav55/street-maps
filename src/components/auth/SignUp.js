@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux';
+import { signUp } from '../../store/actions/authActions';
+import { Redirect } from 'react-router-dom';
 export class SignUp extends Component {
-
-
     state={
         email : '',
-        name  : '',
-        passowrd : '',
+        password : '',
+        firstName : '',
+        lastName : ''
     }
     handleChange=(event)=>{
         this.setState({
@@ -17,7 +19,8 @@ export class SignUp extends Component {
     }
     handleSubmit=(event)=>{
         event.preventDefault();
-        console.log(this.state);
+       // console.log(this.state);
+       this.props.addUser(this.state)
     }
 
     render() {
@@ -42,7 +45,8 @@ export class SignUp extends Component {
                             },
                         }));
       
-          
+        const {auth , authError}=this.props;
+        if(auth.uid) return <Redirect  to="/"/>
         return (
             <div className="sign-in-form">
                     <form className={classes.container} onSubmit={this.handleSubmit} autoComplete="off">
@@ -58,17 +62,25 @@ export class SignUp extends Component {
                     />
                 
                     <TextField
-                    id="name"
-                    label="name"
-                    placeholder="Enter your name"
+                    id="firstName"
+                    label="First Name"
+                    placeholder="FirstName"
+                    fullWidth
+                    margin="normal"
+                    onChange={this.handleChange}
+                    />      
+
+                     <TextField
+                    id="lastName"
+                    label="LastName"
+                    placeholder="Last Name"
                     fullWidth
                     margin="normal"
                     onChange={this.handleChange}
                     />                
-                    
 
                     <TextField
-                    id="passowrd"
+                    id="password"
                     label="password"
                     fullWidth
                     type="password"
@@ -76,6 +88,9 @@ export class SignUp extends Component {
                     margin="normal"
                     onChange={this.handleChange}
                     />
+                    <div className="error-text">
+                        <p> { authError }</p>
+                    </div>
                     <Button type="submit" variant="contained" color="primary" className={classes.button}>
                         Create Account
                     </Button>
@@ -84,5 +99,15 @@ export class SignUp extends Component {
         )
     }
 }
-
-export default SignUp;
+const mapStateToProps=(state)=>{
+    return {
+        auth : state.firebase.auth,
+        authError : state.auth.authError
+    }
+}
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        addUser : (newUser)=>{dispatch(signUp(newUser))},
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp);

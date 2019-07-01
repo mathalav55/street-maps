@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
+import { connect }  from 'react-redux';
 class Form extends Component {
     state={
         name: '',
@@ -51,9 +52,10 @@ class Form extends Component {
               margin: theme.spacing(1),
             },
           }));
+        
         return (
-            <div>
-                <form className={classes.container} onSubmit={this.handleSubmit} autoComplete="off" >
+            <div className="form-container">
+                <form  onSubmit={this.handleSubmit} autoComplete="off" >
                     <TextField
                     id="name"
                     label="name"
@@ -94,7 +96,9 @@ class Form extends Component {
                         Upload image
                     </Button>
                     </label>
-                    
+                    <div className="error-text">
+                        <p>{this.props.error}</p>
+                    </div>
                     <Button type="submit" variant="contained" color="primary" className={classes.button}>
                         ADD
                     </Button>
@@ -103,4 +107,9 @@ class Form extends Component {
         )
     }
 }
-export default Form;
+const mapStateToProps=(state)=>{
+    return {
+        error : state.auth.authError,
+    }
+}
+export default connect(mapStateToProps)(Form);

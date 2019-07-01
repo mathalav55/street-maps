@@ -5,6 +5,7 @@ import './add.css';
 import Modal from './form/modal';
 import { addHomeless } from '../../store/actions/addActions';
 import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
 class Add extends Component {
     state={
         name: '',
@@ -31,6 +32,9 @@ class Add extends Component {
                               },
                          
                         }));
+        const {auth} = this.props;
+        if(!auth.uid) return <Redirect to="/signin"/>
+        
         return (
             <div className={classes.container}>
                     <div id="modal">
@@ -42,9 +46,14 @@ class Add extends Component {
         )
     }
 }
+const mapStateToProps=(state)=>{
+    return {
+        auth : state.firebase.auth,
+    }
+}
 const mapDispatchToProps=(dispatch)=>{
     return {
         addHomeless : (homeless)=>dispatch(addHomeless(homeless)),
     }
 }
-export default connect(null,mapDispatchToProps)(Add);
+export default connect(mapStateToProps,mapDispatchToProps)(Add);

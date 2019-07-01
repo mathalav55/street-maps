@@ -54,7 +54,7 @@ export default function SimpleModal(props) {
     <div>
        <Fab color="primary" id="add-icon" aria-label="Add" className={classes.fab} onClick={handleOpen}>
         <AddIcon />
-       </Fab>
+       </Fab> 
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -66,6 +66,7 @@ export default function SimpleModal(props) {
               <Form addData={formData}/>
           </div>
         </div>
+
       </Modal>
     </div>
   );

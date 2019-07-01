@@ -3,6 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { signIn } from '../../store/actions/authActions';
+import { connect }  from 'react-redux';
+import { Redirect} from 'react-router-dom';
+
 class SignIn extends React.Component{
    state={
      email : '',
@@ -10,7 +14,8 @@ class SignIn extends React.Component{
    }
    handleSubmit=(event)=>{
      event.preventDefault();
-      console.log(this.state);
+     // console.log(this.state);
+     this.props.signIn(this.state);
    }
    handleChange=(event)=>{
     this.setState({
@@ -35,10 +40,15 @@ class SignIn extends React.Component{
         menu: {
           width: 200,
         },
+        error : {
+          color : 'red',
+        }
       }));
-    
+      const { authError }=this.props;
+      const { auth} = this.props;
+      if(auth.uid) return <Redirect to="/"/> ;
       return (
-
+              
               <div className="sign-in-form">
                   <form className={classes.container} onSubmit={this.handleSubmit} autoComplete="off" >
                   <Typography variant="h6" className={classes.title}>
@@ -62,12 +72,27 @@ class SignIn extends React.Component{
                           margin="normal"
                           onChange={this.handleChange}
                       />
+                      <div className="error-text">
+                          <p> {authError} </p>
+                      </div>
                       <Button type="submit" variant="contained" color="primary" className={classes.button}>
                           Login
                       </Button>
+                  
                   </form>
               </div>
         );
       }
 }
-export default SignIn;
+const mapStateToProps=(state)=>{
+  return {
+    authError : state.auth.authError,
+    auth : state.firebase.auth
+  }
+}
+const mapDispatchTOProps=(dispatch)=>{
+  return {
+    signIn : (credentials)=>dispatch(signIn(credentials)),
+  }
+}
+export default connect(mapStateToProps,mapDispatchTOProps)(SignIn);

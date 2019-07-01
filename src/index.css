@@ -14,3 +14,6 @@ code {
   padding: 7.5%;
   width : 50%;
 }
+.error-text{
+  color : rgb(180, 4, 4);
+}
