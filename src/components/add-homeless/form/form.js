@@ -36,6 +36,10 @@ class Form extends Component {
             [event.target.id] : event.target.value,
         });
     }
+    handleUpload=(event)=>{
+     console.log(event.target.files[0]);
+     
+    }
     render() {
         const classes = makeStyles(theme => ({
             paper: {
@@ -89,7 +93,7 @@ class Form extends Component {
                     id="image"
                     multiple
                     type="file"
-                    onChange={this.handleChange}
+                    onChange={this.handleUpload}
                     />
                     <label htmlFor="image">
                     <Button  id="submit-button" variant="contained" component="span" className={classes.button}>
