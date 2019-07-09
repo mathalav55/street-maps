@@ -38,6 +38,25 @@ class Form extends Component {
     }
     handleUpload=(event)=>{
      console.log(event.target.files[0]);
+     const file=event.target.files;     
+     const data =new Blob(file,{
+         type : 'image/jpg'
+     });
+     console.log(data);
+     async function getDataURL() {
+        let dataUrl = await new Promise(resolve => {
+          let reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(data);
+        });
+        return dataUrl;
+    }
+    getDataURL().then(resp=>{
+        this.setState({
+            ...this.state,
+            image : resp,
+        });
+    })
      
     }
     render() {

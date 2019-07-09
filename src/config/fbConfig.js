@@ -7,7 +7,7 @@ var firebaseConfig = {
     authDomain: "street-maps-97b34.firebaseapp.com",
     databaseURL: "https://street-maps-97b34.firebaseio.com",
     projectId: "street-maps-97b34",
-    storageBucket: "",
+    storageBucket: "street-maps-97b34.appspot.com",
     messagingSenderId: "269873191268",
     appId: "1:269873191268:web:14ffca949bb63d9c"
   };
