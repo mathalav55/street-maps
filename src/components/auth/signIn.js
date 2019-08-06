@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import { signIn } from '../../store/actions/authActions';
 import { connect }  from 'react-redux';
 import { Redirect} from 'react-router-dom';
-
 class SignIn extends React.Component{
    state={
      email : '',
@@ -78,7 +77,6 @@ class SignIn extends React.Component{
                       <Button type="submit" variant="contained" color="primary" className={classes.button}>
                           Login
                       </Button>
-                  
                   </form>
               </div>
         );

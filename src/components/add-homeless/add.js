@@ -34,7 +34,6 @@ class Add extends Component {
                         }));
         const {auth} = this.props;
         if(!auth.uid) return <Redirect to="/signin"/>
-        
         return (
             <div className={classes.container}>
                     <div id="modal">

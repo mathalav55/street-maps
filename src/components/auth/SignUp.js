@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
+import './css/auth.css';
 export class SignUp extends Component {
     state={
         email : '',
@@ -50,11 +51,9 @@ export class SignUp extends Component {
         return (
             <div className="sign-in-form">
                     <form className={classes.container} onSubmit={this.handleSubmit} autoComplete="off">
-    
-                    
                     <TextField
                         id="email"
-                        label="email"
+                        label="E-mail"
                         placeholder="Email"
                         fullWidth
                         margin="normal"
@@ -81,7 +80,7 @@ export class SignUp extends Component {
 
                     <TextField
                     id="password"
-                    label="password"
+                    label="Password"
                     fullWidth
                     type="password"
                     autoComplete="current-password"
@@ -94,6 +93,9 @@ export class SignUp extends Component {
                     <Button type="submit" variant="contained" color="primary" className={classes.button}>
                         Create Account
                     </Button>
+                    
+                   <div >
+                   </div>
                 </form>
             </div>
         )
@@ -107,7 +109,7 @@ const mapStateToProps=(state)=>{
 }
 const mapDispatchToProps=(dispatch)=>{
     return {
-        addUser : (newUser)=>{dispatch(signUp(newUser))},
+        addUser : (newUser)=>dispatch(signUp(newUser)),
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(SignUp);

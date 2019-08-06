@@ -25,7 +25,6 @@ const useStyles = makeStyles(theme => ({
 
  function SignedIn(props) {
   const classes = useStyles();
-
   return (
     <div >
         <Toolbar>

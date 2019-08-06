@@ -6,7 +6,11 @@ export const addHomeless=(homeless)=>{
         const firestore = getFirestore();
         const storageRef=firebase.storage().ref('homeless_images');
         firestore.collection('add_homeless').add({
-            ...homeless,
+            name: homeless.name,
+            support : homeless.support,
+            landmark : homeless.landmark,
+            location : homeless.location,
+            assigned : homeless.assigned,
             addedAt : new Date()
         }).then((resp)=>{
             return storageRef.child(resp.id).putString(homeless.image,'data_url');
