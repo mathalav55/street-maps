@@ -12,6 +12,7 @@
     "firebase-tools": "^7.0.2",
     "firestore": "^1.1.6",
     "leaflet": "^1.5.1",
+    "loadash": "^1.0.0",
     "react": "^16.8.6",
     "react-blob": "^1.0.1",
     "react-dom": "^16.8.6",
